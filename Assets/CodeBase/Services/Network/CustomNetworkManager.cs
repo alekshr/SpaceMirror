@@ -1,39 +1,29 @@
 using System;
+using CodeBase.Message;
 using Mirror;
-using UnityEngine;
 
 namespace CodeBase.Services.Network
 {
     public class CustomNetworkManager : NetworkManager
     {
-
-        public event Action OnAddClientPlayer = delegate {  };
-
+        public event Action OnClientConnection = delegate {  };
+        public event Action<NetworkConnectionToClient, CharacterMessage> OnAddPlayer = delegate {  };
         
-        public event Action<NetworkConnectionToClient> OnAddPlayer = delegate {  };
-        
-        public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+        public override void OnStartServer()
         {
-            Debug.Log($"[CustomNetworkManager] {nameof(OnServerAddPlayer)}");
-            OnAddPlayer(conn);
+            base.OnStartServer();
+            NetworkServer.RegisterHandler<CharacterMessage>(OnCreateCharacter);
         }
 
         public override void OnClientConnect()
         {
-            if (!clientLoadedScene)
-            {
-                // Ready/AddPlayer is usually triggered by a scene load completing.
-                // if no scene was loaded, then Ready/AddPlayer it here instead.
-                if (!NetworkClient.ready)
-                    NetworkClient.Ready();
-
-                if (autoCreatePlayer)
-                {
-                    OnAddClientPlayer();
-                    NetworkClient.AddPlayer();
-                }
-            }
+            base.OnClientConnect();
+            OnClientConnection();
         }
+        
+        private void OnCreateCharacter(NetworkConnection conn, CharacterMessage message) => 
+            OnAddPlayer((NetworkConnectionToClient)conn, message);
+
     }
 }
 
