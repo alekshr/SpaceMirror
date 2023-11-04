@@ -1,12 +1,10 @@
 using CodeBase.Components;
 using CodeBase.Input;
-using CodeBase.Registration;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Systems;
 using ThunderboltIoc;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
-using VContainer;
 
 
 namespace CodeBase.Systems
@@ -41,7 +39,11 @@ namespace CodeBase.Systems
             foreach (var entity in _filter)
             {
                 ref TransformComponent transformComponent = ref entity.GetComponent<TransformComponent>();
-                transformComponent.Transforms.Translate(_vectorInput * deltaTime * SPEED);
+                ref PlayerComponent player = ref entity.GetComponent<PlayerComponent>();
+                if (transformComponent.Transforms != null && player.PlayerNetworkProvider.isLocalPlayer)
+                {
+                    transformComponent.Transforms.Translate(_vectorInput * deltaTime * SPEED);
+                }
             }
         }
 

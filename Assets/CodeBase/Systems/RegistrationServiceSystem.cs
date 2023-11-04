@@ -16,7 +16,6 @@ namespace CodeBase.Systems
         {
             Debug.Log($"[RegistrationServiceSystem]");
             ThunderboltActivator.Attach<PlayerControlsRegistration>();
-            ThunderboltActivator.Attach<InstantiateObjectRegistration>();
         }
     }
 }

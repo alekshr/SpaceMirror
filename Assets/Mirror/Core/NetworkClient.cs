@@ -494,7 +494,7 @@ namespace Mirror
         }
 
         /// <summary>Register a handler for a message type T. Most should require authentication.</summary>
-        public static void RegisterHandler<T>(Action<T> handler, bool requireAuthentication = true)
+        public static void  RegisterHandler<T>(Action<T> handler, bool requireAuthentication = true)
             where T : struct, NetworkMessage
         {
             ushort msgType = NetworkMessageId<T>.Id;
