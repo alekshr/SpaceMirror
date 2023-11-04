@@ -21,7 +21,7 @@ namespace CodeBase.Systems
         {
             _filter = World.Filter
                 .With<TransformComponent>()
-                .With<PlayerComponent>()
+                .With<NetworkPlayerComponent>()
                 .Build();
         }
 
@@ -32,7 +32,11 @@ namespace CodeBase.Systems
             foreach (var entity in _filter)
             {
                 ref TransformComponent transformComponent = ref entity.GetComponent<TransformComponent>();
-                transformComponent.Transforms.Translate(_vectorInput * deltaTime * SPEED);
+                ref NetworkPlayerComponent networkPlayer = ref entity.GetComponent<NetworkPlayerComponent>();
+                if (transformComponent.Transforms != null && networkPlayer.NetworkBehaviour.isLocalPlayer)
+                {
+                    transformComponent.Transforms.Translate(_vectorInput * deltaTime * SPEED);
+                }
             }
         }
 

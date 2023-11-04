@@ -10,14 +10,12 @@ namespace CodeBase.Loop
 {
     public class SceneLoop : IInitializable, IFixedTickable, ITickable, IDisposable
     {
-        private readonly World _world;
         private readonly SystemsGroup _systems;
         
         [Inject]
         public SceneLoop(IReadOnlyList<IInitializer> initializers, IReadOnlyList<ISystem> systems)
         {
-            _world = World.Create();
-            _systems = _world.CreateSystemsGroup();
+            _systems = World.Default.CreateSystemsGroup();
             //TODO: С такой шуткой нужно разобраться, регстрирует initializer у систем, так как ISystem
             //наследуется от IInitializer и два раза вызывает IInitializer, так как при update вызывает автоматом OnAwake у систем
             AddInitializerToGroup(initializers.Except(systems));
@@ -37,7 +35,7 @@ namespace CodeBase.Loop
         public void Dispose()
         {
             _systems.Dispose();
-            _world.Dispose();
+            World.Default?.Dispose();
         }
 
         private void AddSystemToGroup(IEnumerable<ISystem> systems)

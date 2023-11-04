@@ -10,7 +10,8 @@ namespace CodeBase.Injection
     {
         public void Configure(IContainerBuilder builder)
         {
-            builder.Register<ISystem, InputSystem>(Lifetime.Singleton);
+            builder.Register<IInitializer, IncludePlayerControlSystem>(Lifetime.Scoped);
+            builder.Register<ISystem, InputSystem>(Lifetime.Scoped);
         }
     }
 }

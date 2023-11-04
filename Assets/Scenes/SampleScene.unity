@@ -530,26 +530,18 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _customNetworkManager: {fileID: 1725715561}
+  lifetimeEcs: 1
   _serviceInjections:
-  - rid: 125662192054829059
-  - rid: 125662192054829058
-  - rid: 125662192054829056
-  - rid: 125662192054829057
+  - rid: 4174955706040451075
+  - rid: 4174955706040451080
   references:
     version: 2
     RefIds:
-    - rid: 125662192054829056
-      type: {class: InitializerSystemsInjection, ns: CodeBase.Injection, asm: Assembly-CSharp}
-      data: 
-    - rid: 125662192054829057
-      type: {class: SystemsInjection, ns: CodeBase.Injection, asm: Assembly-CSharp}
-      data: 
-    - rid: 125662192054829058
+    - rid: 4174955706040451075
       type: {class: InjectionControls, ns: CodeBase.Injection, asm: Assembly-CSharp}
       data: 
-    - rid: 125662192054829059
-      type: {class: CreateObjectServiceInject, ns: CodeBase.Injection, asm: Assembly-CSharp}
+    - rid: 4174955706040451080
+      type: {class: SystemsInjection, ns: CodeBase.Injection, asm: Assembly-CSharp}
       data: 
 --- !u!4 &899038681
 Transform:
@@ -653,8 +645,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1725715559}
-  - component: {fileID: 1725715561}
   - component: {fileID: 1725715560}
+  - component: {fileID: 1725715562}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -692,7 +684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetX: 0
   offsetY: 0
---- !u!114 &1725715561
+--- !u!114 &1725715562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -701,7 +693,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725715556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dacdd33df530c34b989ffa8262d46c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
